@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import axios from "axios"
+import axios from "axios"   
 import Props from "@/components/AnalyticsProps.vue";
 import Sidebar from '@/components/SideBar.vue'
 // import axios from "axios"
@@ -54,24 +54,21 @@ export default {
 //       ]);
 //     }
 //   }
-  mounted() {
-    var index = 1;
-    while (index <= 3) {
-      axios
-        .post("http://localhost:5000/staff/summary/" + index)
-        .then(res => {
-          // for (let i= 0; i < res.data.length ; i++) {
-          //   console.log(index, "here")
-          //   this.answers1.push(res.data[i])
-          // }
-          this.answers.push(res.data)
-          index++;
-          // console.log(this.answers[index], "answers")
-        })
-        .catch(err => {
-          console.log("Ni error", err);
-          index = 3;
-        });
+async mounted() {
+     var i = 1;
+    for (i; i < 13; i++) {
+     const response =  await axios
+        .get("http://localhost:8081/admin/report/summary/" + i )
+        this.answers.push(response.data.data);
+        // .then(res => {
+        //   // console.log(res.data.data);
+        //   this.answers.push(res.data.data);
+        //   // this.total = res.data.data[0].length;
+        // })
+        // .catch(err => {
+        //   console.log("Ni error", err);
+        // });
+        // console.log(this.answers, "Hello") 
     }
   }
 //   data:
