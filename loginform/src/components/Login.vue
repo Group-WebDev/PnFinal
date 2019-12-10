@@ -58,6 +58,11 @@ export default {
                 username: this.username,
                 password: this.password
             }
+            // createAdmin(data)
+            //     .then(data=>{
+            //         this.$emit("createAdmin", data.data)
+            //     })
+            //     .catch(() => this.snackbar = true)  
             loginAdmin(data)
                 .then(data => {
                     this.$emit("loginAdmin", data.data)

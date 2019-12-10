@@ -3,25 +3,26 @@
     <v-card class="mx-auto" max-width="344" v-show="submitted">
         <p1>Your Answers will be send to the admin and analyze</p1>
     </v-card>
+     <v-app-bar absolute color="blue" dark fix class="appbar">
+        <v-toolbar-title>PNsider</v-toolbar-title>
+
+        <v-spacer></v-spacer>
+
+        <v-btn link @click="logout()" class="mx-2" fab dark color="white" title="logout" icon>
+            Logout
+            <v-icon dark>mdi-logout</v-icon>
+        </v-btn>
+    </v-app-bar><br/><br/>
     <div class="row" v-show="!submitted">
         <div class="col-md-2"></div>
         <div class="col-md-8">
             <v-container fluid>
-                <!-- <v-col col="12" md="4"></v-col>
-        <v-col col="12" md="4"></v-col>-->
                 <v-form v-model="valid" ref="form" class="form">
                     <!-- <v-col col="12" md="4"> -->
                     <center>
                         <h1>CENTER LIFE</h1>
                     </center>
-                    <!-- <section >
-          <h3>How do you feel in the center?</h3>
-          <input type="radio" v-model="feeling" value="Comfortable" />Comfortable
-          <input type="radio" v-model="feeling" value="Happy" />Happy
-          <input type="radio" v-model="feeling" value="Homesick" />Homesick 
-          <input type="radio" v-model="feeling" value="Sad" />Sad 
-          </section>-->
-
+    
                     <v-radio-group :rules="[v => !!v || 'Item is required']" required v-model="centerLife.Q1" column>
                         <h3>How do you feel in the center?</h3>
                         <v-radio type="radio" label="Comfortable" value="Comfortable"></v-radio>
@@ -209,6 +210,13 @@ export default {
                 .catch(err => {
                     alert(err);
                 });
+        },
+         logout() {
+            // this.$store.dispatch('logout')
+            localStorage.removeItem("username");
+            localStorage.removeItem("token");
+            delete axios.defaults.headers.common["Authorization"];
+            this.$router.push("/");
         }
     }
 };
