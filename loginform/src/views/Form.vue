@@ -1,7 +1,7 @@
 <template>
 <div>
     <v-card class="mx-auto" max-width="344" v-show="submitted">
-        <p1>Your Answers will be send to the admin and analyze</p1>
+        <Previu/>
     </v-card>
      <v-app-bar absolute color="blue" dark fix class="appbar">
         <v-toolbar-title>PNsider</v-toolbar-title>
@@ -169,8 +169,12 @@
 
 <script>
 import axios from "axios";
+import Previu from "@/components/Previu"
 export default {
     name: "Form",
+    components:{
+        Previu
+    },
     data() {
         return {
             submitted: false,
