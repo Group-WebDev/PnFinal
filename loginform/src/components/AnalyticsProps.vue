@@ -7,24 +7,8 @@
                     <i>{{questionLabel}}</i>
                 </v-toolbar-title>
                 {{ question }}
-                <v-divider class="mx-4" inset vertical></v-divider>
-                <div class="my-2">
-                    <v-dialog v-model="dialog" persistent max-width="500">
-                        <template v-slot:activator="{ on }">
-                            <v-btn small class="button" dark v-on="on">See Students</v-btn>
-                        </template>
-                        <v-card>
-                            <v-card-title class="headline">List of Students Answers the Question</v-card-title>
-                            <v-card-text style="height: 300px;"> </v-card-text>
-                            <v-card-actions>
-                                <v-spacer></v-spacer>
-                                <v-btn color="green darken-1" text @click="dialog = false">Close</v-btn>
-                            </v-card-actions>
-                        </v-card>
-                    </v-dialog>
-                </div>
                 <v-dialog v-model="modal">
-                    <v-data-table :headers="header" :items="students" :items-per-page="5" class="elevation-1"></v-data-table>
+                    <v-data-table :headers="stundentAnsweredHeader" :items="stundentAnswered" :items-per-page="5" class="elevation-1"></v-data-table>
                 </v-dialog>
             </v-toolbar>
         </template>
@@ -70,8 +54,30 @@ export default {
             students: [],
             dialog: false,
             modal: false,
+            stundentAnswered: [],
 
             header: [{
+                    text: "Last Name",
+                    align: "left",
+                    value: "lastname"
+                },
+                {
+                    text: "First Name",
+                    value: "firstname"
+                },
+                {
+                    text: "Gender",
+                    value: "gender",
+
+                },
+                {
+                    text: "Batch",
+                    value: "batch",
+
+                }
+            ],
+
+            stundentAnsweredHeader: [{
                     text: "Last Name",
                     align: "left",
                     value: "lastname"
@@ -106,9 +112,8 @@ export default {
                 )
                 .then(res => {
                     for (let i = 0; i < res.data.length; i++) {
-                       console.log(res.data[i].studentID)
+                        console.log(res.data[i].studentID)
                         this.students.push(res.data[i].studentID);
-
 
                         console.log(
                             res.data[i].studentID.firstname,
@@ -120,6 +125,9 @@ export default {
                     console.log(err);
                 });
             this.modal = true
+        },
+        showStudent(){
+
         }
     }
 };
