@@ -15,7 +15,7 @@ export default {
           id: 'vuechart-example'
         },
         xaxis: {
-          categories: ["good"]
+          categories: ["comfortable"]
         }
       },
       series: [{

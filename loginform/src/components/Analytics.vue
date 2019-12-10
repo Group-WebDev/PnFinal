@@ -1,4 +1,6 @@
 <template>
+<div>
+  <SideBar/>
 <div class="table">
     <div v-for="(ans , index) in answers" :key="index">
         <Props :score="ans" :questionLabel="questions[index]">
@@ -24,9 +26,11 @@
     </div>
     <!-- <Props :score="answers" :question="2"/> -->
 </div>
+</div>
 </template>
 
 <script>
+import SideBar from "@/components/SideBar"
 import Props from "@/components/AnalyticsProps.vue";
 import axios from "axios";
 export default {
@@ -52,7 +56,8 @@ export default {
         };
     },
     components: {
-        Props
+        Props,
+        SideBar
     },
     mounted() {
         var i = 1;

@@ -8,7 +8,7 @@
                 </v-toolbar-title>
                 {{ question }}
                 <v-dialog v-model="modal">
-                    <v-data-table :headers="stundentAnsweredHeader" :items="stundentAnswered" :items-per-page="5" class="elevation-1"></v-data-table>
+                    <v-data-table :headers="header" :items="students" :items-per-page="5" class="elevation-1"></v-data-table>
                 </v-dialog>
             </v-toolbar>
         </template>
@@ -54,30 +54,8 @@ export default {
             students: [],
             dialog: false,
             modal: false,
-            stundentAnswered: [],
 
             header: [{
-                    text: "Last Name",
-                    align: "left",
-                    value: "lastname"
-                },
-                {
-                    text: "First Name",
-                    value: "firstname"
-                },
-                {
-                    text: "Gender",
-                    value: "gender",
-
-                },
-                {
-                    text: "Batch",
-                    value: "batch",
-
-                }
-            ],
-
-            stundentAnsweredHeader: [{
                     text: "Last Name",
                     align: "left",
                     value: "lastname"
@@ -111,9 +89,11 @@ export default {
                     item._id
                 )
                 .then(res => {
-                    for (let i = 0; i < res.data.length; i++) {
-                        console.log(res.data[i].studentID)
+                    console.log(res.data)
+                    for (let i = 0; i <= res.data.length; ++i) {
                         this.students.push(res.data[i].studentID);
+                        // i++;
+
 
                         console.log(
                             res.data[i].studentID.firstname,
@@ -125,9 +105,6 @@ export default {
                     console.log(err);
                 });
             this.modal = true
-        },
-        showStudent(){
-
         }
     }
 };
