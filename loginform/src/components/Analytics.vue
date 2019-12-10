@@ -1,20 +1,15 @@
 <template>
-<div>
-<Sidebar/>
   <div class="table">
     <div v-for="(ans , index) in answers" :key="index">
-      <Props :score="ans" :questionLabel="questions[index]"/>
+      <Props :score="ans" :questionLabel="questions[index]" />
     </div>
-    <!-- <Props :score="answers2" :question="2"/> -->
-  </div>
+    <!-- <Props :score="answers" :question="2"/> -->
   </div>
 </template>
 
 <script>
-import axios from "axios"   
 import Props from "@/components/AnalyticsProps.vue";
-import Sidebar from '@/components/SideBar.vue'
-// import axios from "axios"
+import axios from "axios";
 export default {
   name: "Analytics",
   data() {
@@ -33,50 +28,26 @@ export default {
         "What academic skill that you want to improve?",
         "What challenges have you encounter during class?"
       ],
-      answers: []
-      //   answers2: [{ num: "Jisoo", num: "Baby", num: "Kalabaw" }],
-      //   answers3: []
+      answers: [],
+      total: []
     };
   },
   components: {
-    Props,
-    Sidebar
+    Props
   },
-//   mounted() {
-//     for (let i = 0; i < 12; i++) {
-//       this.answers.push([
-//         { num: "Jane" },
-//         { num: "Repollo" },
-//         { num: "Self" },
-//         { num: "Jisoo" },
-//         { num: "Baby" },
-//         { num: "Kalabaw" }
-//       ]);
-//     }
-//   }
-async mounted() {
-     var i = 1;
+  mounted() {
+    var i = 1;
     for (i; i < 13; i++) {
-     const response =  await axios
-        .get("http://localhost:8081/admin/report/summary/" + i )
-        this.answers.push(response.data.data);
-        // .then(res => {
-        //   // console.log(res.data.data);
-        //   this.answers.push(res.data.data);
-        //   // this.total = res.data.data[0].length;
-        // })
-        // .catch(err => {
-        //   console.log("Ni error", err);
-        // });
-        // console.log(this.answers, "Hello") 
+      axios
+        .post("http://localhost:8081/admin/report/summary/" + i )
+        .then(res => {
+          this.total.push(res.data.data.length)
+          this.answers.push(res.data.data);
+        })
+        .catch(err => {
+          console.log("Ni error", err);
+        });
     }
   }
-//   data:
-//       [{ num: "Jane" },
-//       { num: "Repollo" },
-//       { num: "Self" },
-//       { num: "Jisoo" },
-//       { num: "Baby" },
-//       { num: "Kalabaw" }]
 };
 </script>
