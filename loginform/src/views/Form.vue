@@ -1,8 +1,5 @@
 <template>
 <div>
-    <v-card class="mx-auto" max-width="344" v-show="submitted">
-        <Previu/>
-    </v-card>
      <v-app-bar absolute color="blue" dark fix class="appbar">
         <v-toolbar-title>PNsider</v-toolbar-title>
 
@@ -13,6 +10,9 @@
             <v-icon dark>mdi-logout</v-icon>
         </v-btn>
     </v-app-bar><br/><br/>
+    <v-card class="mx-auto" max-width="544" v-show="submitted">
+        <Previu/>
+    </v-card><br/><br/><br/>
     <div class="row" v-show="!submitted">
         <div class="col-md-2"></div>
         <div class="col-md-8">

@@ -2,14 +2,13 @@
 <div class="col-md-8">
     <v-container fluid>
         <v-btn @click="showanswers">Preview Answers</v-btn>
-        <v-form v-show="showform">
+        <v-form>
 
             <center>
                 <h1>CENTER LIFE</h1>
             </center>
 
             <h3>How do you feel in the center?</h3>
-
             <hr>
 
             <h3>How was your relationship to your co-scholar?</h3>
@@ -65,7 +64,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import {showAnswers} from '@/axios/axios'
 export default {
     data() {
         return {
@@ -75,12 +74,11 @@ export default {
     },
     methods: {
         showanswers() {
-            this.showform = true
-            axios.get('localhost:8081/students/previuosAnswers')
-                .then(res => {
-                    console.log(res.data)
-                    this.preview = res.data
-                })
+            this.showform = true;
+            showAnswers()
+                .then(data => this.preview = data[data.length-1])
+                .catch((err => alert(err)));
+           
         }
     }
 }
