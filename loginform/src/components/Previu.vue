@@ -1,87 +1,47 @@
 <template>
-<div class="col-md-8">
-    <v-container fluid>
-        <v-btn @click="showanswers">Preview Answers</v-btn>
-        <v-form>
-
-            <center>
-                <h1>CENTER LIFE</h1>
-            </center>
-
-            <h3>How do you feel in the center?</h3>
-            <hr>
-
-            <h3>How was your relationship to your co-scholar?</h3>
-
-            <hr>
-
-            <h3>How was your relationship with PN Staff?</h3>
-
-            <hr>
-
-            <h3>How was your overall performance and collaboration of the tasking team?</h3>
-
-            <hr>
-
-            <h3>What PN core values did you experience this week?</h3>
-
-            <hr>
-
-            <h3>What soft skill or behavior that you want to improve?</h3>
-
-            <center>
-                <h1>ACADEMICS</h1>
-            </center>
-            <hr>
-
-            <h3>Which educational activities do you prefer?</h3>
-
-            <hr>
-
-            <h3>What subject do you find difficult?</h3>
-
-            <hr>
-
-            <h3>How do you deal with your difficulties?</h3>
-
-            <hr>
-
-            <h3>How was your relationship with your teacher?</h3>
-
-            <hr>
-
-            <h3>What academic skill that you want to improve?</h3>
-
-            <hr>
-
-            <h3>What challenges have you encounter during class?</h3>
-
-            <br>
-            <br>
-        </v-form>
-    </v-container>
-</div>
+  <div>
+    <!-- <v-btn @click="showanswers">Preview Answers</v-btn> -->
+    <!-- <v-form v-for="(ans , index) in centerLife" :key="index">
+            <StudentAnswers :answers="ans[index]"/>
+    </v-form>-->
+    <StudentAnswers
+      v-for="(item , i) in centerLife"
+      :key="i"
+      :centerLife="item"
+      :academicLife="academicLife[i]"
+      :timestamp="timestamp[0]"
+    />
+  </div>
 </template>
 
 <script>
-import {showAnswers} from '@/axios/axios'
+import { showAnswers } from "@/axios/axios";
+import StudentAnswers from "@/components/StudentAnswers.vue";
 export default {
-    data() {
-        return {
-            preview: [],
-            showform: false
+  components: {
+    StudentAnswers
+  },
+  data() {
+    return {
+      preview: [],
+      timestamp: [],
+      centerLife: [],
+      academicLife: []
+    };
+  },
+  mounted() {
+    showAnswers()
+      .then(data => {
+        for (let i = 0; i < data.length; i++) {
+          // window.console.log(data[i].categories.centerLife)
+          this.timestamp.push(new Date(data[i].timestamp).toUTCString());
+          this.centerLife.push(data[i].categories.centerLife);
+          this.academicLife.push(data[i].categories.academicLife);
         }
-    },
-    methods: {
-        showanswers() {
-            this.showform = true;
-            showAnswers()
-                .then(data => this.preview = data[data.length-1])
-                .catch((err => alert(err)));
-           
-        }
-    }
-}
+      })
+      .catch(err => alert(err));
+  }
+};
 </script>
 
 <style>

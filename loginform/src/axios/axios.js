@@ -59,8 +59,10 @@ export function updateStudent(data, id) {
 }
 
 export function showAnswers() {
-  return axios.get(`${BASE_URL}/students/previuosAnswers`).then(response => {
-    console.log(response)
+  let id = localStorage.getItem("id")
+  console.log("gdfsgdfgdfg",id)
+  return axios.get(`${BASE_URL}/students/previuosAnswers/${id}`).then(response => {
+    console.log(response.data)
     return response.data;
   });
 }

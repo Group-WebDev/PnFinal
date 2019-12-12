@@ -11,7 +11,6 @@
         </v-btn>
     </v-app-bar><br/><br/>
     <v-card class="mx-auto" max-width="544" v-show="submitted">
-        <Previu/>
     </v-card><br/><br/><br/>
     <div class="row" v-show="!submitted">
         <div class="col-md-2"></div>
@@ -169,15 +168,12 @@
 
 <script>
 import axios from "axios";
-import Previu from "@/components/Previu"
 export default {
     name: "Form",
     components:{
-        Previu
     },
     data() {
         return {
-            submitted: false,
             valid: true,
             centerLife: {
                 Q1: null,
@@ -199,11 +195,14 @@ export default {
     },
     methods: {
         submit: function () {
+            // window.location.reload()
+            
             axios
                 .post("http://localhost:8081/students/answers", {
                     academicLife: this.academicLife,
                     centerLife: this.centerLife,
                     token: localStorage.getItem("token")
+                   
                 })
                 .then(() => {
                     //   console.log(res.data);
@@ -214,6 +213,8 @@ export default {
                 .catch(err => {
                     alert(err);
                 });
+                 this.$router.push('/preview')
+                
         },
          logout() {
             // this.$store.dispatch('logout')

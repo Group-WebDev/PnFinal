@@ -1,32 +1,41 @@
 <template>
-<div>
-  <SideBar/>
-<div class="table">
-    <div v-for="(ans , index) in answers" :key="index">
-        <Props :score="ans" :questionLabel="questions[index]">
-            <v-card class="mx-auto" max-width="344">
-                <v-card-text>
-                    <div>Word of the Day</div>
-                    <p class="display-1 text--primary">
-                        be•nev•o•lent
-                    </p>
-                    <p>adjective</p>
-                    <div class="text--primary">
-                        well meaning and kindly.<br>
-                        "a benevolent smile"
-                    </div>
-                </v-card-text>
-                <v-card-actions>
-                    <v-btn text color="deep-purple accent-4">
-                        Learn More
-                    </v-btn>
-                </v-card-actions>
-            </v-card>
-        </Props>
+  <div>
+    <SideBar />
+    <br />
+    <br />
+    <br />
+    <div class="table">
+      <v-menu
+        ref="menu"
+        v-model="menu"
+        :close-on-content-click="false"
+        :return-value.sync="date"
+        transition="scale-transition"
+        offset-y
+        min-width="290px"
+      >
+        <!-- For picking the date on the calendar -->
+        <template v-slot:activator="{ on }">
+          <v-text-field
+            v-model="date"
+            label="Pick a Date"
+            prepend-icon="mdi-calendar"
+            readonly
+            v-on="on"
+          ></v-text-field>
+        </template>
+        <v-date-picker v-model="date" no-title scrollable>
+          <v-spacer></v-spacer>
+          <v-btn text color="primary" @click="menu = false">Cancel</v-btn>
+          <v-btn text color="primary" @click="getDataBy($refs.menu.save(date))">OK</v-btn>
+        </v-date-picker>
+      </v-menu>
+      <div v-for="(ans , index) in answers" :key="index">
+        <Props :score="ans" :questionLabel="questions[index]"></Props>
+      </div>
+      <!-- <Props :score="answers" :question="2"/> -->
     </div>
-    <!-- <Props :score="answers" :question="2"/> -->
-</div>
-</div>
+  </div>
 </template>
 
 <script>
@@ -51,6 +60,8 @@ export default {
                 "What academic skill that you want to improve?",
                 "What challenges have you encounter during class?"
             ],
+             date: new Date().toISOString().substr(0, 10),
+            menu: false,
             answers: [],
             total: []
         };
@@ -71,6 +82,20 @@ export default {
                 .catch(err => {
                     console.log("Ni error", err);
                 });
+        }
+    },
+    methods: {
+        getDataBy(date) {
+            
+            axios
+                .post("http://localhost:8081/admin/report/summary/" + date)
+                .then(res => {
+                    this.total.push(res.data.data.length)
+                    this.answers.push(res.data.data);   
+                })
+                .catch(err => {
+                    console.log("Ni error", err);
+                })
         }
     }
 };

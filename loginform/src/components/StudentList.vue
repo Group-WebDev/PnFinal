@@ -136,7 +136,7 @@ export default {
             ],
             nameRules: [
                 v => !!v || 'This is Required Field',
-                v => /^[a-zA-Z]*$/.test(v) || 'This field should contain only Letters',
+                v => /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/.test(v) || 'This field should contain only Letters',
             ]
         }
     },

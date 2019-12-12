@@ -39,6 +39,7 @@
 <script>
 import {
     loginAdmin
+    // createAdmin
 } from "@/axios/axios"
 // import axios from "axios"
 export default {
@@ -62,12 +63,15 @@ export default {
             //     .then(data=>{
             //         this.$emit("createAdmin", data.data)
             //     })
-            //     .catch(() => this.snackbar = true)  
+            //     .catch((err) => alert(err))  
+
             loginAdmin(data)
                 .then(data => {
+                    console.log(data)
                     this.$emit("loginAdmin", data.data)
                     localStorage.setItem("token", data.token);
                     localStorage.setItem("username", data.username)
+                    localStorage.setItem("id", data.id)
                     if (data.username == "admin") {
                         this.$router.push('/about')
                     } else {

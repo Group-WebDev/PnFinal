@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Form from "@/views/Form.vue";
 import Analytics from "@/components/Analytics.vue"
+import Preview from "@/components/Previu.vue"
 
 Vue.use(VueRouter);
 
@@ -44,6 +45,18 @@ const routes = [{
     path:"/analytics",
     name:"analytics",
     component:Analytics,
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem("token") == null) {
+        next("/");
+      } else {
+        next();
+      }
+    }
+  },
+  {
+    path:"/preview",
+    name:"preview",
+    component:Preview,
     beforeEnter: (to, from, next) => {
       if (localStorage.getItem("token") == null) {
         next("/");
