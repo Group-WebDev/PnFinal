@@ -16,7 +16,7 @@
             <v-icon dark>mdi-logout</v-icon>
         </v-btn>
     </v-app-bar>
-    <v-navigation-drawer height="910" class="overflow-hidden" v-model="drawer" absolute temporary>
+    <v-navigation-drawer height="910vh"  v-model="drawer" absolute temporary>
         <v-list-item>
             <v-list-item-avatar>
             </v-list-item-avatar>
@@ -28,7 +28,7 @@
 
         <v-divider></v-divider>
 
-        <v-list dense>
+        <v-list>
             <v-list-item link @click="dashboard">
                 <v-list-item-action>
                     <v-icon>mdi-home</v-icon>

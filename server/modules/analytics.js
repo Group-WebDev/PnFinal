@@ -118,6 +118,33 @@ function getGenderCount(studentID){
     });
 }
 
+function getStudentsByDate(date, number,rangeDate){
+    date = date.setDate(date.getDate()+1)
+   //console.log(endDate)
+   return new Promise((resolve, reject) =>{
+           if (number < 7) {
+               analytics('centerLife', number, date,rangeDate)
+                   .then(data => {
+                       resolve(data)
+                       // res.json({ data: data})
+                   })
+                   .catch(err => {
+                       reject(err)
+                   })
+   
+           } else {
+               analytics('academicLife', number, date, rangeDate)
+                   .then(data => {
+                       resolve(data)
+                       // res.json({ data: data})
+                   })
+                   .catch(err => {
+                       reject(err)
+                   })
+           }
+   })
+}
+
 
 // function getStudentsInfo(id){
 //     return new Promise((resolve, reject) =>{
@@ -130,6 +157,7 @@ module.exports = {
     analytics,
     getLength,
     getStudentsInfo,
-    getGenderCount
+    getGenderCount,
+    getStudentsByDate
 
 };

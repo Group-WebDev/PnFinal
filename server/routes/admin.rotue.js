@@ -130,6 +130,19 @@ router.post('/report/summary/:number', async (req, res) => {
 
 })
 
+router.post('/report/date', async  (req, res) => {
+    let date = new Date(req.body.date)
+    let rangeDate = new Date(date - 12096e5)
+    let test = []
+    for(let i = 1; i<13; i++){
+      let test2  = await query.getStudentsByDate(date,i,rangeDate)
+      test.push(test2)
+    }
+    res.json(test)
+    console.log(test,'tst')
+})
+
+
 
     //use getStudentsInfo then use projection to get the student id then feed it to getGenderCount for aggregation to get the gender count 
     //fix the getGenderCount

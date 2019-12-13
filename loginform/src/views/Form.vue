@@ -156,7 +156,7 @@
                     <br>
                     <br>
 
-                    <v-btn color="primary" @click="submit">SUBMIT</v-btn>
+                    <v-btn color="primary" :disabled="!valid" @click="submit">SUBMIT</v-btn>
                     <!-- </v-col> -->
                 </v-form>
             </v-container>
@@ -174,7 +174,7 @@ export default {
     },
     data() {
         return {
-            valid: true,
+            valid: false,
             centerLife: {
                 Q1: null,
                 Q2: null,
@@ -196,6 +196,7 @@ export default {
     methods: {
         submit: function () {
             // window.location.reload()
+            if(this.centerLife != null && this.academicLife != null){
             
             axios
                 .post("http://localhost:8081/students/answers", {
@@ -214,6 +215,9 @@ export default {
                     alert(err);
                 });
                  this.$router.push('/preview')
+            }else{
+                alert("error")
+            }
                 
         },
          logout() {
