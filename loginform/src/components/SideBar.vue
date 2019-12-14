@@ -34,7 +34,7 @@
                     <v-icon>mdi-home</v-icon>
                 </v-list-item-action>
                 <v-list-item-content>
-                    <v-list-item-title>Dashboard</v-list-item-title>
+                    <v-list-item-title>Reports</v-list-item-title>
                 </v-list-item-content>
             </v-list-item>
             <v-list-item link @click="studentList">
@@ -44,6 +44,24 @@
                 </v-list-item-action>
                 <v-list-item-content>
                     <v-list-item-title>Student List</v-list-item-title>
+                </v-list-item-content>
+            </v-list-item>
+             <v-list-item link @click="showAnalytics">
+                <v-list-item-action>
+                    <v-icon>mdi-account</v-icon>
+                    <!-- <i class="fad fa-clipboard-list"></i> -->
+                </v-list-item-action>
+                <v-list-item-content>
+                    <v-list-item-title>Academic Analytics</v-list-item-title>
+                </v-list-item-content>
+            </v-list-item>
+             <v-list-item link @click="showCenter">
+                <v-list-item-action>
+                    <v-icon>mdi-account</v-icon>
+                    <!-- <i class="fad fa-clipboard-list"></i> -->
+                </v-list-item-action>
+                <v-list-item-content>
+                    <v-list-item-title>CenterLife Analytics</v-list-item-title>
                 </v-list-item-content>
             </v-list-item>
         </v-list>
@@ -142,6 +160,12 @@ export default {
         },
         studentList() {
           this.$router.push("/about").catch(() => {});
+        },
+        showAnalytics() {
+          this.$router.push("/academic_analytics").catch(() => {});
+        },
+         showCenter() {
+          this.$router.push("/center_analytics").catch(() => {});
         },
         // addevent() {
         //   this.$router.push("/admin/addevent").catch(err => {});

@@ -80,7 +80,7 @@ export default {
     data() {
         return {
             gender:["Male", "Female"],
-            batch: [2021, 2022],
+            batch: 2021,
             add: true,
             search: '',
             students: [],

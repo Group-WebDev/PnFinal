@@ -4,6 +4,8 @@ import Home from "../views/Home.vue";
 import Form from "@/views/Form.vue";
 import Analytics from "@/components/Analytics.vue"
 import Preview from "@/components/Previu.vue"
+import MainAcademic from "@/components/MainAcademic.vue"
+import MainCenter from "@/components/MainCenter.vue"
 
 Vue.use(VueRouter);
 
@@ -21,6 +23,30 @@ const routes = [{
     component: () =>
       import( /* webpackChunkName: "about" */ "../views/About.vue"),
 
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem("token") == null) {
+        next("/");
+      } else {
+        next();
+      }
+    }
+  },
+  {
+    path: "/academic_analytics",
+    name: "academic_analytics",
+    component: MainAcademic,
+    beforeEnter: (to, from, next) => {
+      if (localStorage.getItem("token") == null) {
+        next("/");
+      } else {
+        next();
+      }
+    }
+  },
+  {
+    path: "/center_analytics",
+    name: "center_analytics",
+    component: MainCenter,
     beforeEnter: (to, from, next) => {
       if (localStorage.getItem("token") == null) {
         next("/");
