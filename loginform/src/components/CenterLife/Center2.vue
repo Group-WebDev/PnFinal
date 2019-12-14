@@ -3,7 +3,7 @@
     <v-card>
     <br/><br/>
         <h3>Q2: How was your relationship to your co-scholar? </h3>
-        <apexchart width="500" type="bar" :options="chartOptions" :series="series"></apexchart>
+        <apexchart width="500" type="area" :options="chartOptions" :series="series"></apexchart>
     </v-card>
 </div>
 </template>
@@ -30,6 +30,10 @@ export default {
                         distributed: true
                     }
                 },
+                 dataLabels: {
+                    enabled: false
+                },
+
 
             },
             series: [{

@@ -1,9 +1,9 @@
 <template>
 <div>
     <v-card>
-    <br/><br/>
+        <br /><br />
         <h3>Q4: How was your overall performance and collaboration of the tasking team? </h3>
-        <apexchart width="500" type="bar" :options="chartOptions" :series="series"></apexchart>
+        <apexchart width="500" type="area" :options="chartOptions" :series="series"></apexchart>
     </v-card>
 </div>
 </template>
@@ -30,6 +30,9 @@ export default {
                         distributed: true
                     }
                 },
+                dataLabels: {
+                    enabled: false
+                },
 
             },
             series: [{
@@ -52,7 +55,7 @@ export default {
                 console.log("hi", this.series[0].data)
                 // var datas = ""
                 for (let i = 0; i < res.data.data.length; i++) {
-                     if (res.data.data[i]._id == "Good") {
+                    if (res.data.data[i]._id == "Good") {
                         g += res.data.data[i].answers
                     } else if (res.data.data[i]._id == "Normal") {
                         n += res.data.data[i].answers

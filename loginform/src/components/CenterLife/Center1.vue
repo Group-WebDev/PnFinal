@@ -3,7 +3,7 @@
     <v-card>
     <br/><br/>
         <h3>Q1: How do you feel in the center? </h3>
-        <apexchart width="500" type="bar" :options="chartOptions" :series="series"></apexchart>
+        <apexchart width="500" type="area" :options="chartOptions" :series="series"></apexchart>
     </v-card>
 </div>
 </template>
@@ -16,7 +16,7 @@ export default {
             chartOptions: {
                 options: {
                     chart: {
-                        id: 'vuechart-example'
+                        id: 'vuechart-example',
                     },
                 },
                 xaxis: {
@@ -30,6 +30,10 @@ export default {
                         distributed: true
                     }
                 },
+                 dataLabels: {
+                    enabled: false
+                },
+
 
             },
             series: [{

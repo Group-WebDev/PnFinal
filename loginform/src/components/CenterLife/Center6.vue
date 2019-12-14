@@ -1,9 +1,9 @@
 <template>
 <div>
     <v-card>
-    <br/><br/>
+        <br /><br />
         <h3>Q6: What soft skill or behavior that you want to improve?</h3>
-        <apexchart width="500" type="bar" :options="chartOptions" :series="series"></apexchart>
+        <apexchart width="500" type="area" :options="chartOptions" :series="series"></apexchart>
     </v-card>
 </div>
 </template>
@@ -16,7 +16,10 @@ export default {
             chartOptions: {
                 options: {
                     chart: {
-                        id: 'vuechart-example'
+                        id: 'vuechart-example',
+                        animations: {
+                            speed: 50
+                        }
                     },
                 },
                 xaxis: {
@@ -29,6 +32,9 @@ export default {
                     bar: {
                         distributed: true
                     }
+                },
+                dataLabels: {
+                    enabled: false
                 },
 
             },
@@ -63,15 +69,15 @@ export default {
                         b += res.data.data[i].answers
                     } else if (res.data.data[i]._id == "Sensitivity to Others") {
                         c += res.data.data[i].answers
-                    } else if (res.data.data[i]._id =="Punctuality") {
+                    } else if (res.data.data[i]._id == "Punctuality") {
                         d += res.data.data[i].answers
-                    }else if (res.data.data[i]._id == "Politiness") {
+                    } else if (res.data.data[i]._id == "Politiness") {
                         e += res.data.data[i].answers
-                    }else if (res.data.data[i]._id == "Self Awareness") {
+                    } else if (res.data.data[i]._id == "Self Awareness") {
                         f += res.data.data[i].answers
-                    }else if (res.data.data[i]._id == "Patience") {
+                    } else if (res.data.data[i]._id == "Patience") {
                         g += res.data.data[i].answers
-                    }else if (res.data.data[i]._id == "Honesty") {
+                    } else if (res.data.data[i]._id == "Honesty") {
                         h += res.data.data[i].answers
                     }
                 }

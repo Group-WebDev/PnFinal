@@ -3,7 +3,7 @@
     <v-card>
     <br/><br/>
         <h3>Q5: What PN core values did you experience this week?</h3>
-        <apexchart width="500" type="bar" :options="chartOptions" :series="series"></apexchart>
+        <apexchart width="500" type="area" :options="chartOptions" :series="series"></apexchart>
     </v-card>
 </div>
 </template>
@@ -26,9 +26,12 @@ export default {
                     palette: 'palette1' // upto palette10
                 },
                 plotOptions: {
-                    bar: {
+                    area: {
                         distributed: true
                     }
+                },
+                 dataLabels: {
+                    enabled: false
                 },
 
             },
